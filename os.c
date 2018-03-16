@@ -7,7 +7,7 @@ struct process
 }p[10];
 
 int n;
-void sorting()
+void sorting_on_arrival_time()
 {
 struct process temp;
 int i,j;
@@ -24,11 +24,15 @@ for(j=i+1;j<n;j++)
 }
 void Priority(int a)
 {
-    for(time=p[0].arrival_time;time<sum_burst_time;)
+    int i,time,sum_burst_time;
+    sum_burst_time=a;
+    float sum=0,sum1=0;
+    printf("\nName\t\tArrival Time\tBurst Time\tWaiting Time");
+   for(time=p[0].arrival_time;time<sum_burst_time;)
   {
 
    float check=-1;
-    int biggest_priority_process;
+   int biggest_priority_process;
   for(i=0;i<n;i++)
   {
 
@@ -49,14 +53,16 @@ void Priority(int a)
    p[biggest_priority_process].waiting_time=time-p[biggest_priority_process].arrival_time-p[biggest_priority_process].burst_time;
    p[biggest_priority_process].turnaround_time=time-p[biggest_priority_process].arrival_time;
    p[biggest_priority_process].flag=1;
-printf("\nProcess%d\t\t%d\t\t%d\t\t%d\t\t%",(p[loc].process_number+1),p[loc].arrival_time,p[loc].burst_time,p[loc].waiting_time);
+   sum+=p[biggest_priority_process].waiting_time;
+   sum1=p[biggest_priority_process].waiting_time+p[biggest_priority_process].burst_time;
+printf("\nProcess%d\t\t%d\t\t%d\t\t%d\t\t%",(p[biggest_priority_process].process_number+1),p[biggest_priority_process].arrival_time,p[biggest_priority_process].burst_time,p[biggest_priority_process].waiting_time);
   }
+
+printf("\nAverage waiting time:%f\n",sum/n);
 }
 int main()
 {
- int i,j,time,sum_burst_time=0;
- char c;
- float sum=0,sum1=0;
+ int i,j,sum_burst_time=0;
  printf("Enter no of processes:");
  scanf("%d",&n);
  for(i=0;i<n;i++)
@@ -71,8 +77,6 @@ int main()
  sum_burst_time+=p[i].burst_time;
 
 }
-sorting();
-printf("\nName\t\tArrival Time\tBurst Time\tWaiting Time");
-
-printf("\nAverage waiting time:%f\n",sum/n);
+sorting_on_arrival_time();
+Priority(sum_burst_time);
 }
