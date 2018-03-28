@@ -32,7 +32,7 @@ void Priority(int a)
   {
 
    float check=-1;
-   int biggest_priority_process;
+   int loc;
   for(i=0;i<n;i++)
   {
 
@@ -42,20 +42,20 @@ void Priority(int a)
               if(check < temp)
                {
                 check=temp;
-                biggest_priority_process=i;
+                loc=i;
                }
 
    }
    }
 
 
-   time+=p[biggest_priority_process].burst_time;
-   p[biggest_priority_process].waiting_time=time-p[biggest_priority_process].arrival_time-p[biggest_priority_process].burst_time;
-   p[biggest_priority_process].turnaround_time=time-p[biggest_priority_process].arrival_time;
-   p[biggest_priority_process].flag=1;
-   sum+=p[biggest_priority_process].waiting_time;
-   sum1=p[biggest_priority_process].waiting_time+p[biggest_priority_process].burst_time;
-printf("\nProcess%d\t\t%d\t\t%d\t\t%d\t\t%",(p[biggest_priority_process].process_number+1),p[biggest_priority_process].arrival_time,p[biggest_priority_process].burst_time,p[biggest_priority_process].waiting_time);
+   time+=p[loc].burst_time;
+   p[loc].waiting_time=time-p[loc].arrival_time-p[loc].burst_time;
+   p[loc].turnaround_time=time-p[loc].arrival_time;
+   p[loc].flag=1;
+   sum+=p[loc].waiting_time;
+   sum1=p[loc].waiting_time+p[loc].burst_time;
+printf("\nProcess%d\t\t%d\t\t%d\t\t%d\t\t%",(p[loc].process_number+1),p[loc].arrival_time,p[loc].burst_time,p[loc].waiting_time);
   }
 
 printf("\nAverage waiting time:%f\n",sum/n);
